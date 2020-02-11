@@ -30,6 +30,25 @@ from_port = var.port
    cidr_blocks = ["0.0.0.0/0"]
  }
 }
+resource "aws_security_group" "ingress-all-test-http" {
+name = "allow-all-sg"
+vpc_id = "${aws_vpc.test-env.id}"
+ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+from_port = 80
+    to_port = 80
+    protocol = "tcp"
+  }
+// Terraform removes the default rule
+  egress {
+   from_port = 0
+   to_port = 0
+   protocol = "-1"
+   cidr_blocks = ["0.0.0.0/0"]
+ }
+}
 resource "aws_instance" "test-ec2-instance" {
   ami = "${var.ami_id}"
   instance_type = "t2.micro"
