@@ -1,7 +1,8 @@
 terraform {
   backend "local" {
     path = "/tmp/terraform/workspace/terraform.tfstate"
-  }}
+  }
+  }
 provider "aws" {
   region = var.region
 }
