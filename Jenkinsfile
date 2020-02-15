@@ -1,8 +1,6 @@
 node {
  try  {
  notify('Infrasturcture Updation Identified') 
- def terraform_path="04-Terraform/03-Ansible-Deploy"
-   dir(terraform_path){
   stage('Terraform QA ') {
       sh label: 'Initializing Terraform', script: 'terraform init'
       sh label: 'Verifying the Infra', script: 'terraform plan -out=plan'
@@ -12,7 +10,7 @@ node {
 //  input "delete the infra?"
 //  sh label:'Creating Infra for prod', script:'terraform destroy'
  
-  }}
+  }
 notify('Job Completed')   
 } catch (err) {
   notify("Error ${err}")
