@@ -2,7 +2,7 @@ node {
  try  {
  notify('Infrasturcture Updation Identified') 
 	stage('Git-Checkout') {
-   checkout([$class: 'GitSCM', branches: [[name: 'feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
+   checkout([$class: 'GitSCM', branches: [[name: 'origin/feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
   }
     
   stage('Terraform QA ') {
