@@ -2,6 +2,8 @@ node {
  try  {
  notify('Infrasturcture Updation Identified') 
   stage('Terraform QA ') {
+	  sh label: 'Initializing Terraform', script: 'ls'
+	  sh label: 'Initializing Terraform', script: 'pwd'
       sh label: 'Initializing Terraform', script: 'terraform init'
       sh label: 'Verifying the Infra', script: 'terraform plan -out=plan'
  // sh ‘terraform destroy -auto-approve’
