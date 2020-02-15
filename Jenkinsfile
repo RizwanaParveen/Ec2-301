@@ -1,8 +1,10 @@
 node {
  try  {
  notify('Infrasturcture Updation Identified') 
-	 def project_path="./"
-	 dir (project_path){
+	stage('Git-Checkout') {
+   checkout([$class: 'GitSCM', branches: [[name: 'feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
+  }
+    
   stage('Terraform QA ') {
 	  sh label: 'Initializing Terraform', script: 'ls'
 	  sh label: 'Initializing Terraform', script: 'pwd'
@@ -14,7 +16,7 @@ node {
 //  input "delete the infra?"
 //  sh label:'Creating Infra for prod', script:'terraform destroy'
  
-  }}
+  }
 notify('Job Completed')   
 } catch (err) {
   notify("Error ${err}")
