@@ -6,6 +6,8 @@ node {
   }
     
   stage('Terraform QA ') {
+	  notify ('waiting for your production approval')
+	  input 'proceed with prod?'
 	  sh label: 'Initializing Terraform', script: 'ls'
 	  sh label: 'Initializing Terraform', script: 'pwd'
       sh label: 'Initializing Terraform', script: 'terraform init'
