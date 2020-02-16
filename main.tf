@@ -2,7 +2,7 @@ terraform {
   backend "local" {
     path = "/tmp/terraform/workspace/terraform.tfstate"
   }
-  }
+}
 provider "aws" {
   region = var.region
 }
@@ -34,15 +34,6 @@ from_port = var.port
    protocol = "-1"
    cidr_blocks = ["0.0.0.0/0"]
  }
-}
-resource "aws_security_group_rule" "allow_all" {
-  type            = "ingress"
-  from_port       = 80
-  to_port         = 80
-  protocol        = "tcp"
-  # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
-  cidr_blocks = ["0.0.0.0/0"]
-   security_group_id = "${aws_security_group.ingress-all-test.id}"
 }
 resource "aws_instance" "test-ec2-instance" {
   ami = "${var.ami_id}"
