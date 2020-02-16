@@ -37,12 +37,11 @@ from_port = var.port
 }
 resource "aws_security_group_rule" "allow_all" {
   type            = "ingress"
-  from_port       = 0
-  to_port         = 65535
+  from_port       = 80
+  to_port         = 80
   protocol        = "http"
   # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
-  cidr_blocks = # add a CIDR block here
-  prefix_list_ids = ["0.0.0.0/0"]
+  cidr_blocks = ["0.0.0.0/0"]
 
   security_group_id = "${aws_security_group.ingress-all-test.id}"
 }
