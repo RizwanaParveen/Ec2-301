@@ -14,7 +14,7 @@ node {
       sh label: 'Verifying the Infra', script: 'terraform plan -out=plan'
  // sh ‘terraform destroy -auto-approve’
  sh label:'Creating Infra for prod', script:'terraform apply plan'
- notify('Infrastructure created in Prod)  
+ notify('Infrastructure created in Prod')  
 //  input "delete the infra?"
 //  sh label:'Creating Infra for prod', script:'terraform destroy'
  
