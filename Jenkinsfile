@@ -5,7 +5,7 @@ node {
    checkout([$class: 'GitSCM', branches: [[name: 'origin/feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
   }
     
-  stage('Terraform QA ') {
+  stage('Terraform Prod ') {
 	  notify ('waiting for your production approval')
 	  input 'proceed with prod?'
 	  sh label: 'Initializing Terraform', script: 'ls'
@@ -14,7 +14,7 @@ node {
       sh label: 'Verifying the Infra', script: 'terraform plan -out=plan'
  // sh ‘terraform destroy -auto-approve’
  sh label:'Creating Infra for prod', script:'terraform apply plan'
- notify('Infrastructure created in QA')  
+ notify('Infrastructure created in Prod)  
 //  input "delete the infra?"
 //  sh label:'Creating Infra for prod', script:'terraform destroy'
  
