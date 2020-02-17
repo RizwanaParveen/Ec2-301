@@ -4,7 +4,7 @@ node {
    checkout([$class: 'GitSCM', branches: [[name: 'origin/feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
   }
     
-  stage('Terraform QA ') {
+  stage('Terraform Validate') {
       sh label: 'Initializing Terraform', script: 'terraform init'
       sh label: 'Initializing Terraform', script: 'terraform validate'
       sh label: 'Verifying the Infra', script: 'terraform plan -out=plan'
