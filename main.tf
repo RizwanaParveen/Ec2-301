@@ -42,7 +42,7 @@ resource "aws_security_group_rule" "allow_all" {
   protocol        = "http"
   # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
   cidr_blocks = ["0.0.0.0/0"]
-
+  depends_on = [aws_security_group.ingress-all-test]
   security_group_id = "${aws_security_group.ingress-all-test.id}"
 }
 resource "aws_instance" "test-ec2-instance" {
