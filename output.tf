@@ -1,5 +1,5 @@
 output dns{
-    value = aws_instance.test-ec2-instance
+    value = aws_eip.ip-test-env.public_dns 
 }
 output ip {
     value = aws_eip.ip-test-env.id
