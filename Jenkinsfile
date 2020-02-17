@@ -1,9 +1,13 @@
 node {
  try  {
  notify('Infrasturcture Updation Identified') 
- def terraform_path="04-Terraform/03-Ansible-Deploy"
-   dir(terraform_path){
+	stage('Git-Checkout') {
+   checkout([$class: 'GitSCM', branches: [[name: 'origin/feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
+  }
+    
   stage('Terraform QA ') {
+	  sh label: 'Initializing Terraform', script: 'ls'
+	  sh label: 'Initializing Terraform', script: 'pwd'
       sh label: 'Initializing Terraform', script: 'terraform init'
       sh label: 'Verifying the Infra', script: 'terraform plan -out=plan'
  // sh ‘terraform destroy -auto-approve’
@@ -12,7 +16,7 @@ node {
 //  input "delete the infra?"
 //  sh label:'Creating Infra for prod', script:'terraform destroy'
  
-  }}
+  }
 notify('Job Completed')   
 } catch (err) {
   notify("Error ${err}")
