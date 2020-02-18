@@ -1,6 +1,6 @@
 output EC2_IP{
-    value = "40.70.84.246"
+    value = "40.70.79.15"
 }
-output ip {
+output eip {
     value = aws_eip.ip-test-env.id
 }
