@@ -11,6 +11,10 @@ resource "aws_vpc" "test-env" {
   enable_dns_hostnames = true
   enable_dns_support = true
 }
+resource "aws_eip" "ip-test-env" {
+  instance = "${aws_instance.test-ec2-instance.id}"
+  vpc      = true
+}
 resource "aws_subnet" "subnet-uno" {
   cidr_block = "${cidrsubnet(aws_vpc.test-env.cidr_block, 3, 1)}"
   vpc_id = "${aws_vpc.test-env.id}"
@@ -39,11 +43,10 @@ resource "aws_security_group_rule" "allow_all" {
   type            = "ingress"
   from_port       = 80
   to_port         = 80
-  protocol        = "http"
+  protocol        = "tcp"
   # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
   cidr_blocks = ["0.0.0.0/0"]
-  depends_on = [aws_security_group.ingress-all-test]
-  security_group_id = "${aws_security_group.ingress-all-test.id}"
+    security_group_id = aws_security_group.ingress-all-test.id
 }
 resource "aws_instance" "test-ec2-instance" {
   ami = "${var.ami_id}"
@@ -53,10 +56,7 @@ resource "aws_instance" "test-ec2-instance" {
 subnet_id = "${aws_subnet.subnet-uno.id}"
 }
 
-resource "aws_eip" "ip-test-env" {
-  instance = "${aws_instance.test-ec2-instance.id}"
-  vpc      = true
-}
+
 resource "aws_internet_gateway" "test-env-gw" {
   vpc_id = "${aws_vpc.test-env.id}"
   
