@@ -1,9 +1,10 @@
 node {
  try  {
  notify('Infrasturcture Updation Identified') 
-	stage('Git-Checkout') {
-   checkout([$class: 'GitSCM', branches: [[name: 'origin/feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/RizwanaParveen/Ec2-301.git']]])
+	   stage('Git-Checkout') {
+   git 'https://github.com/RizwanaParveen/Ec2-301.git'
   }
+
     
   stage('Prod-Infra') {
 	  notify ('waiting for your production approval')
